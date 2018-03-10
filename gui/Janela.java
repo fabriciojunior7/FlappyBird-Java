@@ -68,6 +68,12 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
             }
         }
         this.texto(g);
+        this.desenharImagens(g);
+    }
+
+    public void desenharImagens(Graphics g){
+        ImageIcon i = new ImageIcon(this.getClass().getResource("imagens/teste.png"));
+        i.paintIcon(this, g, this.player.getX(),this.player.getY());
     }
 
     public void texto(Graphics g){

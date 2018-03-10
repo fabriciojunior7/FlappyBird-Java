@@ -9,6 +9,7 @@ public class Obstaculo extends Entidade implements Movimentavel{
 
     //Atributos
     private Tubo tuboTop, tuboBase;
+    private BarraScore barraScore;
     private int separacao;
     protected int velocidadeX, velocidadeY;
 
@@ -20,6 +21,7 @@ public class Obstaculo extends Entidade implements Movimentavel{
         this.y = r.nextInt(300) + this.separacao + 10;
         this.tuboBase = new Tubo(x, this.y);
         this.tuboTop = new Tubo(x, this.y-this.tuboBase.getAltura()-this.separacao);
+        this.barraScore = new BarraScore(x + this.largura + 20);
         this.velocidadeX = -2;
         this.velocidadeY = 0;
     }
@@ -31,6 +33,7 @@ public class Obstaculo extends Entidade implements Movimentavel{
         this.y += this.velocidadeY;
         this.tuboTop.atualizarPosicao(this.x);
         this.tuboBase.atualizarPosicao(this.x);
+        this.barraScore.atualizarPosicao(x + this.largura + 20);
         if(this.x < -this.largura){
             this.reset();
         }
@@ -40,6 +43,7 @@ public class Obstaculo extends Entidade implements Movimentavel{
     public void desenhar(Graphics g){
         this.tuboTop.desenhar(g);
         this.tuboBase.desenhar(g);
+        this.barraScore.desenhar(g);
     }
 
     public void reset(){
@@ -47,9 +51,29 @@ public class Obstaculo extends Entidade implements Movimentavel{
         this.x = 640;
         this.y = r.nextInt(300) + this.separacao + 10;
         this.tuboBase.reset(this.x, this.y);
-        this.tuboTop.reset(x, this.y-this.tuboBase.getAltura()-this.separacao);
+        this.tuboTop.reset(this.x, this.y-this.tuboBase.getAltura()-this.separacao);
+        this.barraScore.reset(x + this.largura + 20);
+    }
+
+    public void pontuar(){
+        this.barraScore.Pontuar();
     }
 
     //Metodos Especiais
+    public Entidade getTuboBase(){
+        return this.tuboBase;
+    }
+
+    public Entidade getTuboTop(){
+        return this.tuboTop;
+    }
+
+    public Entidade getBarraPontuar(){
+        return this.barraScore;
+    }
+
+    public boolean getPontuar(){
+        return this.barraScore.getPontuar();
+    }
 
 }

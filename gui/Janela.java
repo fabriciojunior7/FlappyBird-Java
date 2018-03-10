@@ -59,7 +59,21 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
                 ((Obstaculo) entidade).atualizarPosicao();
             }
             entidade.desenhar(g);
+            if(Collide.rect(this.player, ((Obstaculo) entidade).getTuboBase()) || Collide.rect(this.player, ((Obstaculo) entidade).getTuboTop()) || this.player.getGameOver()){
+                this.gameOver();
+            }
+            if(Collide.rect(this.player, ((Obstaculo) entidade).getBarraPontuar()) && ((Obstaculo) entidade).getPontuar()){
+                this.player.pontuar();
+                ((Obstaculo) entidade).pontuar();
+            }
         }
+        this.texto(g);
+    }
+
+    public void texto(Graphics g){
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.setColor(Color.white);
+        g.drawString(this.player.getScore()+"", 5,20);
     }
 
     public void setPlayer(Bird player){
@@ -72,6 +86,11 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
 
     public void removeEntidade(Entidade entidade){
         this.entidades.remove(entidade);
+    }
+
+    public void gameOver(){
+        System.out.println("GAME OVER!");
+        this.timer.stop();
     }
 
 

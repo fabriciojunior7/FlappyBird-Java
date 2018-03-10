@@ -1,7 +1,9 @@
 package gui;
 
 import logica.Bird;
+import logica.Collide;
 import logica.Entidade;
+import logica.Obstaculo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,11 +13,11 @@ import java.util.ArrayList;
 public class Janela extends JPanel implements ActionListener, KeyListener, MouseListener{
 
     //Atributos
-    private JFrame tela;
-    private Timer timer;
-    private Bird player;
-    private ArrayList<Entidade> entidades;
-    private boolean pause;
+    protected JFrame tela;
+    protected Timer timer;
+    protected Bird player;
+    protected ArrayList<Entidade> entidades;
+    protected boolean pause;
 
     //Construtor
     public Janela(String titulo, int largura, int altura){
@@ -32,11 +34,16 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
         this.tela.add(this);
         this.tela.addKeyListener(this);
         this.tela.addMouseListener(this);
-        this.timer = new Timer(35, this);
+        this.timer = new Timer(24, this);
         this.timer.start();
         this.player = new Bird(310,230);
         this.entidades = new ArrayList<Entidade>();
         this.pause = false;
+
+        int numObstaculos = 4;
+        for(int i=0; i<numObstaculos; i++){
+            this.entidades.add(new Obstaculo(640 + i*160));
+        }
     }
 
     //Metodos
@@ -48,6 +55,9 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
         this.player.atualizarPosicao();
         this.player.desenhar(g);
         for(Entidade entidade : this.entidades){
+            if(entidade instanceof Obstaculo){
+                ((Obstaculo) entidade).atualizarPosicao();
+            }
             entidade.desenhar(g);
         }
     }

@@ -1,10 +1,6 @@
 package sistema;
 
 import gui.Janela;
-import logica.Entidade;
-import logica.Bird;
-
-import java.util.ArrayList;
 
 public class Facade {
 

@@ -1,6 +1,8 @@
 package logica;
 
-public class Bird extends Entidade {
+import interfaces.Movimentavel;
+
+public class Bird extends Entidade implements Movimentavel{
 
     //Atributos
     protected int score;
@@ -26,6 +28,7 @@ public class Bird extends Entidade {
         this.velocidadeY = -this.forcaPulo;
     }
 
+    @Override
     public void atualizarPosicao(){
         if(this.velocidadeY < this.getVelocidadeYMax){
             this.velocidadeY += this.GRAVIDADE;
@@ -36,9 +39,9 @@ public class Bird extends Entidade {
             this.y = 0;
         }
 
-        else if(this.y > 400-this.altura){
+        else if(this.y > 430-this.altura){
             this.velocidadeY = 0;
-            this.y = 400-this.altura;
+            this.y = 430-this.altura;
         }
 
         this.y += this.velocidadeY;

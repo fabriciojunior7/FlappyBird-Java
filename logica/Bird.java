@@ -11,7 +11,7 @@ public class Bird extends Entidade implements Movimentavel{
 
     //Construtor
     public Bird(int x, int y) {
-        super(x, y, 20, 20);
+        super(x, y, 37, 37);
         this.score = 0;
         this.forcaPulo = 10;
         this.velocidadeX = 0;
@@ -38,7 +38,7 @@ public class Bird extends Entidade implements Movimentavel{
         }
 
         //Game Over
-        if(this.y < 0 || this.y > 430-this.altura){
+        if(this.y < 0 || this.y > 440-this.altura){
             this.gameOver = true;
         }
 

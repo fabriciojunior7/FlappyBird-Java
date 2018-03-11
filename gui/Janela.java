@@ -18,6 +18,7 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     protected Bird player;
     protected ArrayList<Entidade> entidades;
     protected boolean pause;
+    protected ImageIcon imagemBird;
 
     //Construtor
     public Janela(String titulo, int largura, int altura){
@@ -39,6 +40,8 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
         this.player = new Bird(310,230);
         this.entidades = new ArrayList<Entidade>();
         this.pause = false;
+        
+        this.imagemBird = new ImageIcon(this.getClass().getResource("imagens/bird1.png"));
 
         int numObstaculos = 4;
         for(int i=0; i<numObstaculos; i++){
@@ -49,14 +52,15 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     //Metodos
     @Override
     public void paintComponent(Graphics g){
-        g.setColor(Color.BLACK);
+        //g.setColor(new Color(255, 255, 255));
+    	g.setColor(Color.white);
         g.fillRect(0,0,640,480);
 
         this.player.atualizarPosicao();
-        this.player.desenhar(g);
+        //this.player.desenhar(g);
         for(Entidade entidade : this.entidades){
             if(entidade instanceof Obstaculo){
-                ((Obstaculo) entidade).atualizarPosicao();
+                ((Obstaculo) entidade).atualizarPosicao(this.player.getScore());
             }
             entidade.desenhar(g);
             if(Collide.rect(this.player, ((Obstaculo) entidade).getTuboBase()) || Collide.rect(this.player, ((Obstaculo) entidade).getTuboTop()) || this.player.getGameOver()){
@@ -72,14 +76,18 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     }
 
     public void desenharImagens(Graphics g){
-        ImageIcon i = new ImageIcon(this.getClass().getResource("imagens/teste.png"));
-        i.paintIcon(this, g, this.player.getX(),this.player.getY());
+        imagemBird.paintIcon(this, g, this.player.getX(),this.player.getY());
     }
-
+ 
     public void texto(Graphics g){
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.setColor(Color.white);
-        g.drawString(this.player.getScore()+"", 5,20);
+        g.setFont(new Font("Arial", Font.BOLD, 75));
+        g.setColor(new Color(40, 40, 40));
+        if(this.player.getScore() < 10) {
+        	g.drawString(this.player.getScore()+"", 305, 80);
+        }
+        else {
+        	g.drawString(this.player.getScore()+"", 280, 80);
+        }
     }
 
     public void setPlayer(Bird player){

@@ -18,12 +18,12 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     protected Bird player;
     protected ArrayList<Entidade> entidades;
     protected boolean pause;
-    protected ImageIcon imagemBird;
+    protected ImageIcon imagemBird, imagemTuboBase, imagemTuboTop, imagemSol;
 
     //Construtor
     public Janela(String titulo, int largura, int altura){
         if(largura <= 0 || altura <= 0){
-            throw new IllegalArgumentException("Não é possível criar uma Tela com largura ou altura iguais ou menores que zero.");
+            throw new IllegalArgumentException("Nao e possivel criar uma Tela com largura ou altura iguais ou menores que zero.");
         }
         this.tela = new JFrame(titulo);
         this.tela.setSize(largura, altura);
@@ -37,11 +37,14 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
         this.tela.addMouseListener(this);
         this.timer = new Timer(24, this);
         this.timer.start();
-        this.player = new Bird(310,230);
+        this.player = new Bird(310, 100);
         this.entidades = new ArrayList<Entidade>();
         this.pause = false;
         
         this.imagemBird = new ImageIcon(this.getClass().getResource("imagens/bird1.png"));
+        this.imagemTuboBase = new ImageIcon(this.getClass().getResource("imagens/tuboBase1.png"));
+        this.imagemTuboTop = new ImageIcon(this.getClass().getResource("imagens/tuboTop1.png"));
+        this.imagemSol = new ImageIcon(this.getClass().getResource("imagens/sol1.png"));
 
         int numObstaculos = 4;
         for(int i=0; i<numObstaculos; i++){
@@ -53,8 +56,9 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     @Override
     public void paintComponent(Graphics g){
         //g.setColor(new Color(255, 255, 255));
-    	g.setColor(Color.white);
-        g.fillRect(0,0,640,480);
+    	g.setColor(new Color(127, 227, 255));
+        g.fillRect(0, 0, 640, 480);
+        this.desenharCenario(g);
 
         this.player.atualizarPosicao();
         //this.player.desenhar(g);
@@ -62,7 +66,14 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
             if(entidade instanceof Obstaculo){
                 ((Obstaculo) entidade).atualizarPosicao(this.player.getScore());
             }
-            entidade.desenhar(g);
+            //entidade.desenhar(g);
+            try {
+            	imagemTuboBase.paintIcon(this, g, ((Obstaculo) entidade).getTuboBase().getX(), ((Obstaculo) entidade).getTuboBase().getY());
+                imagemTuboTop.paintIcon(this, g, ((Obstaculo) entidade).getTuboTop().getX(), ((Obstaculo) entidade).getTuboTop().getY());
+			} catch (Exception e) {
+				
+			}
+            
             if(Collide.rect(this.player, ((Obstaculo) entidade).getTuboBase()) || Collide.rect(this.player, ((Obstaculo) entidade).getTuboTop()) || this.player.getGameOver()){
                 this.gameOver();
             }
@@ -76,8 +87,20 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     }
 
     public void desenharImagens(Graphics g){
-        imagemBird.paintIcon(this, g, this.player.getX(),this.player.getY());
+    	try {
+    		imagemBird.paintIcon(this, g, this.player.getX(),this.player.getY());
+		} catch (Exception e) {
+			
+		}
     }
+    
+    public void desenharCenario(Graphics g) {
+    	try {
+    		imagemSol.paintIcon(this, g, 25, 25);
+		} catch (Exception e) {
+			
+		}
+    } 
  
     public void texto(Graphics g){
         g.setFont(new Font("Arial", Font.BOLD, 75));
@@ -88,6 +111,8 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
         else {
         	g.drawString(this.player.getScore()+"", 280, 80);
         }
+        g.setFont(new Font("Arial", Font.ITALIC, 12));
+        g.drawString("Fabricio Junior", 5, 445);
     }
 
     public void setPlayer(Bird player){

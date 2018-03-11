@@ -13,7 +13,7 @@ public class FlappyBird {
     public static void main(String args[]){
 
         Facade facade = new Facade();
-        facade.novoJogo(">>> FlappyBird <<<", 640, 480);
+        facade.novoJogo("FlappyDinho - Fabricio Junior", 640, 480);
 
     }
 

@@ -11,7 +11,7 @@ public class Tubo extends Entidade{
     //Construtor
     public Tubo(int x, int y) {
         super(x, y, 40, 400);
-        this.setCor(Color.red);
+        this.setCor(Color.blue);
     }
 
     //Metodos

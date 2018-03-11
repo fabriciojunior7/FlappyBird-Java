@@ -32,7 +32,7 @@ public class Bird extends Entidade implements Movimentavel{
 
     @Override
     public void atualizarPosicao(){
-        //Ação Gravitacional
+        //Acao Gravitacional
         if(this.velocidadeY < this.getVelocidadeYMax){
             this.velocidadeY += this.GRAVIDADE;
         }

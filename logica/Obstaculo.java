@@ -19,11 +19,11 @@ public class Obstaculo extends Entidade{
         Random r = new Random();
         this.separacaoBase = 200;
         this.separacao = this.separacaoBase;
-        this.y = r.nextInt(310) + this.separacao + 10;
+        this.y = r.nextInt(310) + this.separacao;
         this.tuboBase = new Tubo(x, this.y);
         this.tuboTop = new Tubo(x, this.y-this.tuboBase.getAltura()-this.separacao);
         this.barraScore = new BarraScore(x + this.largura + 20);
-        this.velocidadeX = -4;
+        this.velocidadeX = -3;
         this.velocidadeY = 0;
     }
 
@@ -48,23 +48,27 @@ public class Obstaculo extends Entidade{
 
     public void reset(int score){
         Random r = new Random();
+        //FASE 1
         if(score <= 25) {
         	this.separacao = this.separacaoBase - score*2;
         }
+        //FASE 2
         else if(score <= 50){
         	this.separacao = r.nextInt(200) + 90;
         }
+        //FASE 3
+        else if(score <= 75){
+        	this.separacao = r.nextInt(100) + 90;
+        }
+        //FASE 4
         else {
         	this.separacao = r.nextInt(20) + 90;
         }
         this.x = 640;
-        this.y = r.nextInt(310) + this.separacao + 10;
+        this.y = r.nextInt(310) + this.separacao;
         this.tuboBase.reset(this.x, this.y);
         this.tuboTop.reset(this.x, this.y-this.tuboBase.getAltura()-this.separacao);
         this.barraScore.reset(x + this.largura + 20);
-        
-        System.out.println(this.separacao);
-        
     }
 
     public void pontuar(){

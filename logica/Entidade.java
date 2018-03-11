@@ -11,7 +11,7 @@ public class Entidade {
     //Construtor
     public Entidade(int x, int y, int largura, int altura){
         if(largura <= 0 || altura <= 0){
-            throw new IllegalArgumentException("Não é possível criar uma Entidade com largura ou altura iguais ou menores que zero.");
+            throw new IllegalArgumentException("Nao e possivel criar uma Entidade com largura ou altura iguais ou menores que zero.");
         }
         this.x = x;
         this.y = y;

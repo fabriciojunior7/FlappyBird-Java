@@ -13,7 +13,7 @@ public class Bird extends Entidade implements Movimentavel{
     public Bird(int x, int y) {
         super(x, y, 37, 37);
         this.score = 0;
-        this.forcaPulo = 10;
+        this.forcaPulo = 11;
         this.velocidadeX = 0;
         this.velocidadeY = 0;
         this.getVelocidadeYMax = 30;
@@ -30,7 +30,6 @@ public class Bird extends Entidade implements Movimentavel{
         this.velocidadeY = -this.forcaPulo;
     }
 
-    @Override
     public void atualizarPosicao(){
         //Acao Gravitacional
         if(this.velocidadeY < this.getVelocidadeYMax){
@@ -38,7 +37,7 @@ public class Bird extends Entidade implements Movimentavel{
         }
 
         //Game Over
-        if(this.y < 0 || this.y > 440-this.altura){
+        if(this.y < 0 || this.y > 450-this.altura){
             this.gameOver = true;
         }
 

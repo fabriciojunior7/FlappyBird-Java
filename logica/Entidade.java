@@ -1,6 +1,8 @@
 package logica;
 
+import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Entidade {
 
@@ -8,7 +10,7 @@ public class Entidade {
     protected int x, y, largura, altura;
     protected Color cor;
 
-    //Construtor
+    //Construtores
     public Entidade(int x, int y, int largura, int altura){
         if(largura <= 0 || altura <= 0){
             throw new IllegalArgumentException("Nao e possivel criar uma Entidade com largura ou altura iguais ou menores que zero.");

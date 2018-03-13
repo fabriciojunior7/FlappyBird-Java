@@ -35,7 +35,7 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
         this.tela.add(this);
         this.tela.addKeyListener(this);
         this.tela.addMouseListener(this);
-        this.timer = new Timer(24, this);
+        this.timer = new Timer(22, this);
         this.timer.start();
         this.player = new Bird(310, 100);
         this.entidades = new ArrayList<Entidade>();
@@ -90,7 +90,7 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     	try {
     		imagemBird.paintIcon(this, g, this.player.getX(),this.player.getY());
 		} catch (Exception e) {
-			
+			//e.printStackTrace();
 		}
     }
     
@@ -98,7 +98,7 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     	try {
     		imagemSol.paintIcon(this, g, 25, 25);
 		} catch (Exception e) {
-			
+            //e.printStackTrace();
 		}
     } 
  
@@ -151,18 +151,18 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
         if(!this.pause){
 
             //PULAR
-            if(keyEvent.getKeyCode() == 32){
+            if(keyEvent.getKeyCode() == 32 || keyEvent.getKeyCode() == 87 || keyEvent.getKeyCode() == 38){
                 this.player.pular();
             }
 
         }
 
         //PAUSE
-        if(keyEvent.getKeyCode() == 27 && !this.pause){
+        if((keyEvent.getKeyCode() == 27 || keyEvent.getKeyCode() == 10 || keyEvent.getKeyCode() == 80) && !this.pause){
             this.pause = true;
             this.timer.stop();
         }
-        else if(keyEvent.getKeyCode() == 27 && this.pause){
+        else if((keyEvent.getKeyCode() == 27 || keyEvent.getKeyCode() == 10 || keyEvent.getKeyCode() == 80) && this.pause){
             this.pause = false;
             this.timer.start();
         }

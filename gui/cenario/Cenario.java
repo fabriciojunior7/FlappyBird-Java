@@ -3,6 +3,7 @@ package gui.cenario;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Cenario {
 	
@@ -12,6 +13,7 @@ public class Cenario {
 	private boolean dia;
 	private float ceu;
 	private int r, g, b;
+	private int numNuvens;
 	
 	//Construtor
 	public Cenario(JPanel janela){
@@ -22,6 +24,13 @@ public class Cenario {
 		this.r = 102 + (int)this.ceu;
 		this.g = 255 + (int)this.ceu;
 		this.b = 255 + (int)this.ceu;
+		this.nuvens = new ArrayList<Nuvem>();
+		Random random = new Random();
+		this.numNuvens = random.nextInt(30) + 20;
+		for(int i=0; i<this.numNuvens; i++){
+			Nuvem n = new Nuvem(janela);
+			this.nuvens.add(n);
+		}
 	}
 	
 	//Metodos
@@ -41,6 +50,11 @@ public class Cenario {
 			this.lua.desenhar(g);
 		}
 
+		for(Nuvem n : this.nuvens){
+			n.atualizarPosicao();
+			n.desenhar(g);
+		}
+
 		//Coloracao do Ceu
 		if((this.sol.getX() > 320-this.sol.getLargura()/2 && this.dia) || this.lua.getX() < 320-this.lua.getLargura()/2 && !this.dia){
 			this.ceu += 0.22*t;
@@ -52,11 +66,9 @@ public class Cenario {
 		//Alternancia Dia/Noite
 		if(this.sol.getX() <= -this.sol.getLargura()+5 && this.dia){
 			this.dia = false;
-			System.out.println(this.dia);
 		}
 		else if(this.lua.getX() <= -this.lua.getLargura()+5 && !this.dia){
 			this.dia = true;
-			System.out.println(this.dia);
 		}
 	}
 

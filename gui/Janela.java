@@ -86,13 +86,14 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
  
     public void desenharTexto(Graphics g){
         g.setFont(new Font("Arial", Font.BOLD, 75));
-        g.setColor(new Color(40, 40, 40));
+        g.setColor(new Color(40, 40, 40, 100));
         if(this.player.getScore() < 10) {
         	g.drawString(this.player.getScore()+"", 305, 80);
         }
         else {
         	g.drawString(this.player.getScore()+"", 280, 80);
         }
+        g.setColor(new Color(40, 40, 40));
         g.setFont(new Font("Arial", Font.ITALIC, 12));
         g.drawString("Fabricio Junior", 5, 445);
     }

@@ -12,15 +12,16 @@ public class Nuvem extends Astro{
 	private int nImagem;
 
 	//Contrutor
-	public Nuvem(int x, int y, String local, int nImagem, JPanel janela){
-		super(x, y, 0, 0, local, janela);
-		this.x = x;
-		this.y = y;
-		this.largura = this.imagem.getIconWidth();
-		this.altura = this.imagem.getIconHeight();
+	public Nuvem(JPanel janela){
+		super(new Random().nextInt(641), new Random().nextInt(101), 1, 1, "imagens/nuvem1.png", janela);
+		this.x = super.x;
+		this.y = super.y;
+		super.largura = this.imagem.getIconWidth();
+		super.altura = this.imagem.getIconHeight();
 		Random r = new Random();
 		this.velocidadeX = 1 - r.nextFloat();
-		this.nImagem = nImagem;
+		this.nImagem = 8;
+		this.imagem = new ImageIcon(this.janela.getClass().getResource("imagens/nuvem" + (r.nextInt(this.nImagem)+1) + ".png"));
 	}
 
 	//Metodos
@@ -40,5 +41,6 @@ public class Nuvem extends Astro{
 		this.y = r.nextInt(101);
 		super.y = (int)this.y;
 		this.velocidadeX = 1 - r.nextFloat();
+		this.imagem = new ImageIcon(this.janela.getClass().getResource("imagens/nuvem" + (r.nextInt(this.nImagem)+1) + ".png"));
 	}
 }

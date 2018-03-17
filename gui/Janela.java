@@ -46,9 +46,9 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
 
         this.imagemSol = new ImageIcon(this.getClass().getResource("imagens/sol2.png"));
 
-        int numObstaculos = 4;
+        int numObstaculos = 3;
         for(int i=0; i<numObstaculos; i++){
-            this.entidades.add(new Obstaculo(640 + i*160, this));
+            this.entidades.add(new Obstaculo(640 + i*215, this));
         }
     }
 
@@ -86,7 +86,7 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
  
     public void desenharTexto(Graphics g){
         g.setFont(new Font("Arial", Font.BOLD, 75));
-        g.setColor(new Color(40, 40, 40, 100));
+        g.setColor(new Color(102, 51, 0, 180));
         if(this.player.getScore() < 10) {
         	g.drawString(this.player.getScore()+"", 305, 80);
         }
@@ -111,8 +111,8 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
     }
 
     public void gameOver(){
-        //System.out.println("GAME OVER!");
-        //this.timer.stop();
+        System.out.println("GAME OVER!");
+        this.timer.stop();
     }
 
 
@@ -163,7 +163,7 @@ public class Janela extends JPanel implements ActionListener, KeyListener, Mouse
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-
+        this.player.pular();
     }
 
     @Override

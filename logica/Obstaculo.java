@@ -51,15 +51,15 @@ public class Obstaculo extends Entidade{
         Random r = new Random();
         //FASE 1
         if(score <= 25) {
-        	this.separacao = this.separacaoBase - score*2;
+            this.separacao = r.nextInt(200) + 130;
         }
         //FASE 2
         else if(score <= 50){
-        	this.separacao = r.nextInt(200) + 90;
+            this.separacao = (int)(this.separacaoBase - score*1.2);
         }
         //FASE 3
         else if(score <= 75){
-        	this.separacao = r.nextInt(100) + 90;
+        	this.separacao = r.nextInt(60) + 90;
         }
         //FASE 4
         else {

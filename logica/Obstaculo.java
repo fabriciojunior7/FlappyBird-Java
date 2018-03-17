@@ -2,6 +2,7 @@ package logica;
 
 import interfaces.Movimentavel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -14,14 +15,14 @@ public class Obstaculo extends Entidade{
     protected int velocidadeX, velocidadeY;
 
     //Construtor
-    public Obstaculo(int x){
+    public Obstaculo(int x, JPanel janela){
         super(x, 300, 40, 400);
         Random r = new Random();
         this.separacaoBase = 200;
         this.separacao = this.separacaoBase;
         this.y = r.nextInt(310) + this.separacao;
-        this.tuboBase = new Tubo(x, this.y);
-        this.tuboTop = new Tubo(x, this.y-this.tuboBase.getAltura()-this.separacao);
+        this.tuboBase = new Tubo(x, this.y, "imagens/tuboBase1.png", janela);
+        this.tuboTop = new Tubo(x, this.y-this.tuboBase.getAltura()-this.separacao, "imagens/tuboTop1.png", janela);
         this.barraScore = new BarraScore(x + this.largura + 20);
         this.velocidadeX = -3;
         this.velocidadeY = 0;

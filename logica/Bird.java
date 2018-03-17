@@ -2,6 +2,8 @@ package logica;
 
 import interfaces.Movimentavel;
 
+import javax.swing.*;
+
 public class Bird extends Entidade implements Movimentavel{
 
     //Atributos
@@ -10,8 +12,8 @@ public class Bird extends Entidade implements Movimentavel{
     protected boolean gameOver;
 
     //Construtor
-    public Bird(int x, int y) {
-        super(x, y, 37, 37);
+    public Bird(int x, int y, String local, JPanel janela) {
+        super(x, y, 37, 37, local, janela);
         this.score = 0;
         this.forcaPulo = 11;
         this.velocidadeX = 0;

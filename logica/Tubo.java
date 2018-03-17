@@ -2,6 +2,7 @@ package logica;
 
 import interfaces.Movimentavel;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Tubo extends Entidade{
@@ -9,8 +10,8 @@ public class Tubo extends Entidade{
     //Atributos
 
     //Construtor
-    public Tubo(int x, int y) {
-        super(x, y, 40, 400);
+    public Tubo(int x, int y, String local, JPanel janela) {
+        super(x, y, 40, 400, local, janela);
         this.setCor(Color.blue);
     }
 
